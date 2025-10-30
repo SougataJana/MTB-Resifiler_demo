@@ -203,7 +203,7 @@ def display_current_config_compact(config_dict):
 load_css_and_background()
 
 # --- Main Application Area ---
-st.markdown('<h1 class="main-title">MTB-Resifiler Flexible Pipeline Dashboard</h1>', unsafe_allow_html=True)
+st.markdown('<h1 class="main-title">  JANA MTB-Resifiler Flexible Pipeline Dashboard</h1>', unsafe_allow_html=True)
 st.markdown("<p class='subtitle'>Configure your MTB WGS analysis workflow and upload your data.</p>", unsafe_allow_html=True)
 
 # --- Visual Intro Recommendations Section ---
