@@ -279,7 +279,7 @@ st.markdown("---") # Separator after recommendations
 
 # --- Configuration Section ---
 st.header("1. Pipeline Configuration")
-st.info("you can chose your own combination)
+st.info("you can chose your own combination")
 st.markdown('<div class="config-section">', unsafe_allow_html=True) # Start styled div
 
 config_col1, config_col2 = st.columns([1, 3]) # Ratio for mode selection vs options
