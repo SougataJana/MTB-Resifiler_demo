@@ -278,18 +278,13 @@ st.markdown("---") # Separator after recommendations
 
 
 # --- Configuration Section ---
-# --- Configuration Section ---
-# --- Configuration Section ---
 st.header("1. Pipeline Configuration")
 st.info("You can choose your own combination")
 
-# 🧱 Start a clean, self-contained card container
+# ✅ Wrap the HTML + content in one Streamlit container
 with st.container():
     st.markdown('<div class="config-section">', unsafe_allow_html=True)
 
-    # ────────────────────────────────────────────────
-    # Configuration layout and logic
-    # ────────────────────────────────────────────────
     config_col1, config_col2 = st.columns([1, 3])
     current_config_display = {}
 
@@ -340,7 +335,6 @@ with st.container():
             current_config_display = temp_advanced_config
             display_current_config_compact(current_config_display)
 
-    # 🔒 Close card
     st.markdown('</div>', unsafe_allow_html=True)
 
 # --- File Uploader ---
