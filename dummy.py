@@ -278,61 +278,61 @@ st.markdown("---") # Separator after recommendations
 
 
 # --- Configuration Section ---
-st.header("1. Pipeline Configuration")
-st.info("You can choose your own combination")
+# --- Configuration Section (from Dashboard) ---
+st.markdown("""
+<div class="config-section">
+<h3>1. Pipeline Configuration</h3>
+<p style='color: gray; margin-top: -0.5em;'>You can choose your own combination.</p>
+</div>
+""", unsafe_allow_html=True)
 
-# Wrap your content properly inside the div
-with st.container():
-    st.markdown('<div class="config-section">', unsafe_allow_html=True)
+# No `st.container()` here — start content immediately
+config_col1, config_col2 = st.columns([1, 3])
+current_config_display = {}
 
-    config_col1, config_col2 = st.columns([1, 3])
-    current_config_display = {}
+with config_col1:
+    if 'config_mode' not in st.session_state:
+        st.session_state.config_mode = "Standard (Recommended)"
+    mode = st.radio(
+        "Configuration Mode:",
+        ("Standard (Recommended)", "Advanced (Custom)"),
+        key="config_mode",
+        help="Choose 'Standard' for the validated MycoVarP workflow or 'Advanced' to customize."
+    )
 
-    with config_col1:
-        if 'config_mode' not in st.session_state:
-            st.session_state.config_mode = "Standard (Recommended)"
-        mode = st.radio(
-            "Configuration Mode:",
-            ("Standard (Recommended)", "Advanced (Custom)"),
-            key="config_mode",
-            help="Choose 'Standard' for the validated MycoVarP workflow or 'Advanced' to customize."
-        )
+with config_col2:
+    if st.session_state.config_mode == "Standard (Recommended)":
+        st.info("Using the standard MycoVarP pipeline configuration.")
+        current_config_display = STANDARD_CONFIG
+        display_current_config_compact(current_config_display)
 
-    with config_col2:
-        if st.session_state.config_mode == "Standard (Recommended)":
-            st.info("Using the standard MycoVarP pipeline configuration.")
-            current_config_display = STANDARD_CONFIG
-            display_current_config_compact(current_config_display)
-
-        else:
-            st.warning("Advanced Mode: Ensure selections are appropriate for your analysis.")
-            adv_col1, adv_col2, adv_col3 = st.columns(3)
-            cols = [adv_col1, adv_col2, adv_col3]
-            col_idx = 0
-            temp_advanced_config = {}
-            for key in OPTIONS.keys():
-                opts = OPTIONS[key]
-                standard_val = STANDARD_CONFIG.get(key)
-                with cols[col_idx % len(cols)]:
-                    default_index = 0
-                    if standard_val and standard_val in opts:
-                        default_index = opts.index(standard_val)
-                    session_key = f"advanced_{key.lower().replace('/', '').replace(' ', '_').replace('.', '').replace('(','').replace(')','')}"
-                    if session_key not in st.session_state:
-                        st.session_state[session_key] = opts[default_index]
-                    selected_option = st.selectbox(
-                        f"{key}:", opts,
-                        index=opts.index(st.session_state[session_key]),
-                        key=f"sb_{session_key}",
-                        help=f"Choose the desired option for {key}."
-                    )
-                    st.session_state[session_key] = selected_option
-                    temp_advanced_config[key] = selected_option
-                col_idx += 1
-            current_config_display = temp_advanced_config
-            display_current_config_compact(current_config_display)
-
-    st.markdown('</div>', unsafe_allow_html=True)  # Properly close the div
+    else:
+        st.warning("Advanced Mode: Ensure selections are appropriate for your analysis.")
+        adv_col1, adv_col2, adv_col3 = st.columns(3)
+        cols = [adv_col1, adv_col2, adv_col3]
+        col_idx = 0
+        temp_advanced_config = {}
+        for key in OPTIONS.keys():
+            opts = OPTIONS[key]
+            standard_val = STANDARD_CONFIG.get(key)
+            with cols[col_idx % len(cols)]:
+                default_index = 0
+                if standard_val and standard_val in opts:
+                    default_index = opts.index(standard_val)
+                session_key = f"advanced_{key.lower().replace('/', '').replace(' ', '_').replace('.', '').replace('(','').replace(')','')}"
+                if session_key not in st.session_state:
+                    st.session_state[session_key] = opts[default_index]
+                selected_option = st.selectbox(
+                    f"{key}:", opts,
+                    index=opts.index(st.session_state[session_key]),
+                    key=f"sb_{session_key}",
+                    help=f"Choose the desired option for {key}."
+                )
+                st.session_state[session_key] = selected_option
+                temp_advanced_config[key] = selected_option
+            col_idx += 1
+        current_config_display = temp_advanced_config
+        display_current_config_compact(current_config_display)
 
 
 # --- File Uploader ---
