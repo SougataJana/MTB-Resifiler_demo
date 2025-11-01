@@ -282,7 +282,6 @@ st.markdown("---") # Separator after recommendations
 st.markdown("""
 <div class="config-section">
 <h3>1. Pipeline Configuration</h3>
-<p style='color: gray; margin-top: -0.5em;'>You can choose your own combination.</p>
 </div>
 """, unsafe_allow_html=True)
 
