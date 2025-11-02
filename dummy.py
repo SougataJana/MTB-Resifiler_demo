@@ -101,7 +101,7 @@ with rec3:
 
 st.markdown("---")
 # --- end block 3 ---
-cwith st.container():
+with st.container():
     st.markdown('<div class="config-section">', unsafe_allow_html=True)
     st.subheader("Pipeline Configuration Options")
     st.markdown('</div>', unsafe_allow_html=True)
