@@ -102,15 +102,24 @@ with rec3:
 st.markdown("---")
 
 # --- end of block 3
-st.header("pipeline configuration")
+st.header("1. Pipeline Configuration")
+st.info("You can choose your own combination")
 
-
-with st.container():
+config_box = st.container()
+with config_box:
     st.markdown('<div class="config-section">', unsafe_allow_html=True)
-    # contents of the section start here
     col1, col2 = st.columns([1, 3])
-    ...
+    with col1:
+        st.radio("Configuration Mode", ["Standard", "Advanced"])
+    with col2:
+        st.info("Standard configuration active")
     st.markdown('</div>', unsafe_allow_html=True)
 
-
-
+# ↓ CSS fix: Remove blank space between info() and the container
+st.markdown("""
+    <style>
+    .block-container > div:has(.config-section) {
+        margin-top: -1.2rem !important;
+    }
+    </style>
+""", unsafe_allow_html=True)
