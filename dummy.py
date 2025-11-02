@@ -101,44 +101,4 @@ with rec3:
 
 st.markdown("---")
 # --- end block 3 ---
-# --- Block 4: Configuration card ---
-st.header("1. Pipeline Configuration")
-st.info("You can choose your own combination")
-
-with st.container():
-    st.markdown('<div class="config-section">', unsafe_allow_html=True)
-
-    col_left, col_right = st.columns([1,3], gap="large")
-
-    with col_left:
-        if 'config_mode' not in st.session_state:
-            st.session_state.config_mode = "Standard (Recommended)"
-        st.radio("Configuration Mode:", ("Standard (Recommended)", "Advanced (Custom)"), key="config_mode")
-
-    with col_right:
-        if st.session_state.config_mode == "Standard (Recommended)":
-            st.info("Using the standard MycoVarP pipeline configuration.")
-            # compact view (static for demo)
-            st.markdown("""
-            <div class="current-config-summary">
-              <div class="config-item">QC: FastQC</div>
-              <div class="config-item">Trimmer: Trimmomatic</div>
-              <div class="config-item">Aligner: BWA-MEM</div>
-              <div class="config-item">Variant Caller: GATK</div>
-              <div class="config-item">Annotation: SnpEff/Annovar</div>
-            </div>
-            """, unsafe_allow_html=True)
-        else:
-            st.warning("Advanced Mode: customize options below.")
-            adv_cols = st.columns(3)
-            # fake selectboxes for UI demo
-            keys = ["QC Tool","Read Trimmer","Aligner","Variant Caller","Annotation Tool","Mutation Database"]
-            for i, k in enumerate(keys):
-                with adv_cols[i%3]:
-                    st.selectbox(k, ["Option A","Option B","Option C"], index=0)
-
-    st.markdown('</div>', unsafe_allow_html=True)
-# --- end block 4 ---
-
-
-
+st.markdown('<div class="config-section">', unsafe_allow_html=True)
