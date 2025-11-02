@@ -65,7 +65,41 @@ load_ui_css()
 # --- end block 1 ---
 # --- Block 2: Hero header ---
 st.markdown('<div style="margin-top: 0.6rem;"></div>', unsafe_allow_html=True)
-st.markdown('<div><h1 class="main-title">JANA MTB-Resifiler Flexible Pipeline Dashboard</h1></div>', unsafe_allow_html=True)
+st.markdown('<div><h1 class="main-title"> MTB-Resifiler Flexible Pipeline Dashboard</h1></div>', unsafe_allow_html=True)
 st.markdown("<p class='subtitle'>Configure your MTB WGS analysis workflow and upload your data.</p>", unsafe_allow_html=True)
 # --- end block 2 ---
+# --- Block 3: Recommendation cards ---
+st.markdown("### Key Areas for Pipeline Flexibility")
+rec1, rec2, rec3 = st.columns(3, gap="large")
+
+with rec1:
+    st.markdown("""
+    <div class="recommendation-card">
+      <strong>🧬 Variant Caller</strong>
+      <div style="font-size:0.9rem;color:#C8C8C8;margin-top:6px;">Choices impact accuracy — DeepVariant for hard cases.</div>
+      <div style="margin-top:8px"><span class="option-card"><strong>GATK</strong></span><span class="option-card">DeepVariant</span><span class="option-card">FreeBayes</span></div>
+    </div>
+    """, unsafe_allow_html=True)
+
+with rec2:
+    st.markdown("""
+    <div class="recommendation-card">
+      <strong>🔬 Mutation Database</strong>
+      <div style="font-size:0.9rem;color:#C8C8C8;margin-top:6px;">Relevant DBs change interpretation (clinical vs research).</div>
+      <div style="margin-top:8px"><span class="option-card"><strong>In-House</strong></span><span class="option-card">WHO</span></div>
+    </div>
+    """, unsafe_allow_html=True)
+
+with rec3:
+    st.markdown("""
+    <div class="recommendation-card">
+      <strong>🗺️ Reference Genome</strong>
+      <div style="font-size:0.9rem;color:#C8C8C8;margin-top:6px;">Pick lineage-specific refs for divergent strains.</div>
+      <div style="margin-top:8px"><span class="option-card"><strong>H37Rv</strong></span><span class="option-card">Lineage 2</span></div>
+    </div>
+    """, unsafe_allow_html=True)
+
+st.markdown("---")
+# --- end block 3 ---
+
 
