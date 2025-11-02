@@ -100,6 +100,8 @@ with rec3:
     """, unsafe_allow_html=True)
 
 st.markdown("---")
+
 # --- end of block 3
+st.header("pipeline configuration")
 
 
