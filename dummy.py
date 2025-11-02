@@ -102,24 +102,40 @@ with rec3:
 st.markdown("---")
 
 # --- end of block 3
+# 🟩 HEADER
 st.header("1. Pipeline Configuration")
 st.info("You can choose your own combination")
 
-config_box = st.container()
-with config_box:
-    st.markdown('<div class="config-section">', unsafe_allow_html=True)
+# 🟦 CONFIG CARD — no HTML divs!
+with st.container():
+    st.markdown(
+        """
+        <style>
+        /* make this particular container look like a card */
+        div[data-testid="stVerticalBlock"]:has(> div[data-testid="stHorizontalBlock"]) {
+            background-color: rgba(30, 35, 48, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1.2rem 1.8rem;
+            margin-bottom: 1.5rem;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
     col1, col2 = st.columns([1, 3])
     with col1:
-        st.radio("Configuration Mode", ["Standard", "Advanced"])
-    with col2:
-        st.info("Standard configuration active")
-    st.markdown('</div>', unsafe_allow_html=True)
+        mode = st.radio(
+            "Configuration Mode:",
+            ("Standard (Recommended)", "Advanced (Custom)"),
+            key="config_mode",
+        )
 
-# ↓ CSS fix: Remove blank space between info() and the container
-st.markdown("""
-    <style>
-    .block-container > div:has(.config-section) {
-        margin-top: -1.2rem !important;
-    }
-    </style>
-""", unsafe_allow_html=True)
+    with col2:
+        if mode == "Standard (Recommended)":
+            st.info("Using the standard MycoVarP pipeline configuration.")
+        else:
+            st.warning("Advanced Mode: Ensure selections are appropriate for your analysis.")
