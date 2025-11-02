@@ -102,21 +102,22 @@ with rec3:
 st.markdown("---")
 
 # --- end of block 3
-# 🟩 HEADER
+# --- 🧩 BLOCK 4: Pipeline Configuration ---
+
 st.header("1. Pipeline Configuration")
 st.info("You can choose your own combination")
 
-# 🟦 CONFIG CARD — no HTML divs!
 with st.container():
+    # --- Card styling injected for this container ---
     st.markdown(
         """
         <style>
-        /* make this particular container look like a card */
+        /* Apply card look to this configuration block */
         div[data-testid="stVerticalBlock"]:has(> div[data-testid="stHorizontalBlock"]) {
             background-color: rgba(30, 35, 48, 0.7);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 8px;
-            padding: 1.2rem 1.8rem;
+            padding: 1.5rem 1.8rem;
             margin-bottom: 1.5rem;
             backdrop-filter: blur(8px);
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
@@ -126,16 +127,41 @@ with st.container():
         unsafe_allow_html=True,
     )
 
+    # --- Columns for layout ---
     col1, col2 = st.columns([1, 3])
+    if 'config_mode' not in st.session_state:
+        st.session_state.config_mode = "Standard (Recommended)"
+
+    # --- Left Column: mode selector ---
     with col1:
+        st.subheader("Configuration Mode")
         mode = st.radio(
-            "Configuration Mode:",
+            "",
             ("Standard (Recommended)", "Advanced (Custom)"),
             key="config_mode",
+            help="Choose 'Standard' for the validated MycoVarP workflow or 'Advanced' to customize."
         )
 
+    # --- Right Column: settings depending on mode ---
     with col2:
-        if mode == "Standard (Recommended)":
+        if st.session_state.config_mode == "Standard (Recommended)":
             st.info("Using the standard MycoVarP pipeline configuration.")
+            display_current_config_compact(STANDARD_CONFIG)
+
         else:
             st.warning("Advanced Mode: Ensure selections are appropriate for your analysis.")
+            temp_advanced_config = {}
+            adv_cols = st.columns(3)
+            col_idx = 0
+            for key, opts in OPTIONS.items():
+                with adv_cols[col_idx % 3]:
+                    default_val = STANDARD_CONFIG.get(key, opts[0])
+                    selected = st.selectbox(
+                        f"{key}:",
+                        opts,
+                        index=opts.index(default_val) if default_val in opts else 0,
+                        key=f"adv_{key.lower().replace(' ', '_').replace('/', '_')}"
+                    )
+                    temp_advanced_config[key] = selected
+                col_idx += 1
+            display_current_config_compact(temp_advanced_config)
