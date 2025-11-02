@@ -105,3 +105,12 @@ st.markdown("---")
 st.header("pipeline configuration")
 
 
+with st.container():
+    st.markdown('<div class="config-section">', unsafe_allow_html=True)
+    # contents of the section start here
+    col1, col2 = st.columns([1, 3])
+    ...
+    st.markdown('</div>', unsafe_allow_html=True)
+
+
+
