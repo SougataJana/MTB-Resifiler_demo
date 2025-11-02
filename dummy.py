@@ -100,9 +100,13 @@ with rec3:
     """, unsafe_allow_html=True)
 
 st.markdown("---")
-# --- end block 3 ---
+# --- end of block 3
+
+# --- Configuration Section ---
 with st.container():
     st.markdown('<div class="config-section">', unsafe_allow_html=True)
-    st.subheader("Pipeline Configuration Options")
+    st.header("1. Pipeline Configuration")
+    st.info("You can choose your own combination")
     st.markdown('</div>', unsafe_allow_html=True)
+
 
