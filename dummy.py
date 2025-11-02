@@ -63,3 +63,9 @@ def load_ui_css(image_file="background.jpg"):
 # call once
 load_ui_css()
 # --- end block 1 ---
+# --- Block 2: Hero header ---
+st.markdown('<div style="margin-top: 0.6rem;"></div>', unsafe_allow_html=True)
+st.markdown('<div><h1 class="main-title">JANA MTB-Resifiler Flexible Pipeline Dashboard</h1></div>', unsafe_allow_html=True)
+st.markdown("<p class='subtitle'>Configure your MTB WGS analysis workflow and upload your data.</p>", unsafe_allow_html=True)
+# --- end block 2 ---
+
